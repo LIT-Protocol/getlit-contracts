@@ -53,7 +53,7 @@ if (!fs.existsSync(OUTDIR)) {
   fs.mkdirSync(OUTDIR);
 }
 
-const data = await getContracts({ index: 0 });
+const data = await getContracts({ index: 1 });
 
 const maxNameLength = data.reduce((maxLength, contract) => {
   return Math.max(maxLength, contract.name.length);
