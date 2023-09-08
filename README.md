@@ -27,8 +27,8 @@ npx @getlit/contracts [options]
 
 ## Init
 
-<video src="https://github.com/LIT-Protocol/getlit-contracts/raw/main/init.mov" controls="controls" style="max-width: 730px;">
+[![npx @getlit/sdk](https://img.youtube.com/vi/8eNQHYKCDNk/0.jpg)](https://www.youtube.com/watch?v=8eNQHYKCDNk)
 
 ## Update
 
-<video src="https://github.com/LIT-Protocol/getlit-contracts/raw/main/update.mov" controls="controls" style="max-width: 730px;">
+[![npx @getlit/sdk --update](https://img.youtube.com/vi/RpsTJlOyOMA/0.jpg)](https://www.youtube.com/watch?v=RpsTJlOyOMA)
