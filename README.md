@@ -27,8 +27,8 @@ npx @getlit/contracts [options]
 
 ## Init
 
-[![npx @getlit/sdk](https://img.youtube.com/vi/8eNQHYKCDNk/0.jpg)](https://www.youtube.com/watch?v=8eNQHYKCDNk)
+[![npx @getlit/sdk](https://img.youtube.com/vi/RpsTJlOyOMA/0.jpg)](https://www.youtube.com/watch?v=RpsTJlOyOMA)
 
 ## Update
 
-[![npx @getlit/sdk --update](https://img.youtube.com/vi/RpsTJlOyOMA/0.jpg)](https://www.youtube.com/watch?v=RpsTJlOyOMA)
+[![npx @getlit/sdk --update](https://img.youtube.com/vi/8eNQHYKCDNk/0.jpg)](https://www.youtube.com/watch?v=8eNQHYKCDNk)
