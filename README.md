@@ -20,7 +20,7 @@ npx @getlit/contracts [options]
 
 ## Options
 
-- --`update`: Use this flag to update the contract files if a newer version is available.
+- `--update`: Use this flag to update the contract files if a newer version is available.
 - `--index`: Specify the index number to fetch a particular contract. By default, the index is set to `0`. (only 0, 1) atm.
 
 # Demo
