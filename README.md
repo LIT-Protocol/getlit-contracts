@@ -22,3 +22,13 @@ npx @getlit/contracts [options]
 
 - --`update`: Use this flag to update the contract files if a newer version is available.
 - `--index`: Specify the index number to fetch a particular contract. By default, the index is set to `0`. (only 0, 1) atm.
+
+# Demo
+
+## Init
+
+<video src="https://github.com/LIT-Protocol/getlit-contracts/raw/main/init.mov" controls="controls" style="max-width: 730px;">
+
+## Update
+
+<video src="https://github.com/LIT-Protocol/getlit-contracts/raw/main/update.mov" controls="controls" style="max-width: 730px;">
