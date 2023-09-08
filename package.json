@@ -1,0 +1,7 @@
+{
+  "name": "@getlit/contracts",
+  "dependencies": {
+    "@typechain/ethers-v5": "^11.1.1",
+    "typechain": "^8.3.1"
+  }
+}
