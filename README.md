@@ -2,6 +2,8 @@
 
 The `@getlit/contracts` script fetches contract data from the `https://lit-general-worker.getlit.dev/contract-addresses` API and generates contract files, including JSON, JS, and TypeScript files. It also produces typechain types for the contracts.
 
+See `./lit-contracts`
+
 # Quick Start
 
 ```
