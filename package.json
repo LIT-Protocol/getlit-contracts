@@ -1,13 +1,13 @@
 {
   "name": "@getlit/contracts",
-  "version": "0.1.0",
+  "version": "0.1.3",
   "description": "A script to get the latest Lit contract addresses & ABI, with types 😉",
   "main": "index.mjs",
   "scripts": {
-    "start": "node index.js"
+    "start": "node index.mjs"
   },
   "bin": {
-    "@getlit/contracts": "./index.js"
+    "@getlit/contracts": "./index.mjs"
   },
   "repository": {
     "type": "git",

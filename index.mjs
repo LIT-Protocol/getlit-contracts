@@ -9,6 +9,17 @@ const OUTDIR = "lit-contracts";
 // Check for --update flag
 let shouldUpdate = process.argv.includes("--update");
 
+// Capture the index argument
+let _index = 0; // default value
+const indexArgIndex = process.argv.indexOf("--index");
+if (indexArgIndex !== -1 && process.argv[indexArgIndex + 1]) {
+  _index = parseInt(process.argv[indexArgIndex + 1], 10);
+  if (isNaN(_index)) {
+    console.error("Invalid index provided. Using default index: 0.");
+    _index = 0;
+  }
+}
+
 async function getContracts({ index }) {
   try {
     const res = await fetch(API);
@@ -55,7 +66,7 @@ if (!fs.existsSync(OUTDIR)) {
   fs.mkdirSync(OUTDIR);
 }
 
-const data = await getContracts({ index: 1 });
+const data = await getContracts({ index: _index });
 
 const maxNameLength = data.reduce((maxLength, contract) => {
   return Math.max(maxLength, contract.name.length);
