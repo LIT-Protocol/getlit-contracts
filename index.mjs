@@ -3,7 +3,10 @@
 import fs from "fs";
 import { runTypeChain } from "typechain";
 
-const API = "https://lit-general-worker.getlit.dev/contract-addresses";
+const CAYENNE_API = "https://lit-general-worker.getlit.dev/contract-addresses";
+const SERRANO_API =
+  "https://lit-general-worker.getlit.dev/serrano-contract-addresses";
+
 const OUTDIR = "lit-contracts";
 
 // Check for --update flag
@@ -20,9 +23,24 @@ if (indexArgIndex !== -1 && process.argv[indexArgIndex + 1]) {
   }
 }
 
+let network = "cayenne"; // default value
+const networkArgIndex = process.argv.indexOf("--network");
+if (networkArgIndex !== -1 && process.argv[networkArgIndex + 1]) {
+  const providedNetwork = process.argv[networkArgIndex + 1];
+  if (["cayenne", "serrano"].includes(providedNetwork)) {
+    network = providedNetwork;
+  } else {
+    console.error(
+      `Invalid network provided: ${providedNetwork}. Using default network: Cayenne.`
+    );
+  }
+}
+
+const API_URL = network === "cayenne" ? CAYENNE_API : SERRANO_API;
+
 async function getContracts({ index }) {
   try {
-    const res = await fetch(API);
+    const res = await fetch(API_URL);
     const data = await res.json();
 
     if (data.success !== true) {

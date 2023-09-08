@@ -1,3 +1,4 @@
+export * from "./AccessControlConditions.sol/AccessControlConditions.ts";
 export * from "./Allowlist.sol/Allowlist.ts";
 export * from "./Multisender.sol/Multisender.ts";
 export * from "./PKPHelper.sol/PKPHelper.ts";
