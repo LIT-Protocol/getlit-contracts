@@ -178,13 +178,28 @@ for (const contract of data) {
       `import { ethers } from "ethers";
 import { ${_name}Data } from "./${_name}.data";
 
-export const ${_name}Contract = (provider) => new ethers.Contract(
+export const get${_name}Contract = (provider) => new ethers.Contract(
   ${_name}Data.address,
   ${_name}Data.abi,
   provider
 );`
 
     )
+
+    // -- 6 create an index.ts file that exports everything
+    fs.writeFileSync(
+      `${OUTDIR}/${_name}.sol/index.ts`,
+      `export * from "./${_name}.data";
+export * from "./${_name}Contract";
+export * from "./${_name}";`
+    );
+      
+    // -- 6b create an index.js file that exports everything
+    fs.writeFileSync(
+      `${OUTDIR}/${_name}.sol/index.js`,
+      `export * from "./${_name}.data";
+export * from "./${_name}Contract";`
+    );
   }
 }
 
