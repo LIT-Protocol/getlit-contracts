@@ -87,7 +87,6 @@ if (!fs.existsSync(OUTDIR)) {
 const data = await getContracts({ index: _index });
 
 const maxNameLength = data.reduce((maxLength, contract) => {
-
   const contractName = contract.name.replace(" ", "");
 
   return Math.max(maxLength, contractName.length);
@@ -153,13 +152,13 @@ for (const contract of data) {
 
     // -- 2) export as a js file
     fs.writeFileSync(
-      `${OUTDIR}/${_name}.sol/${_name}.data.js`,
+      `${OUTDIR}/${_name}.sol/${_name}Data.js`,
       `export const ${_name}Data = ${contractInfo}`
     );
 
     // -- 3) export as a ts file
     fs.writeFileSync(
-      `${OUTDIR}/${_name}.sol/${_name}.data.ts`,
+      `${OUTDIR}/${_name}.sol/${_name}Data.ts`,
       `export const ${_name}Data = ${contractInfo}`
     );
 
@@ -176,29 +175,42 @@ for (const contract of data) {
     fs.writeFileSync(
       `${OUTDIR}/${_name}.sol/${_name}Contract.js`,
       `import { ethers } from "ethers";
-import { ${_name}Data } from "./${_name}.data";
+import { ${_name}Data } from "./${_name}Data.js";
 
 export const get${_name}Contract = (provider) => new ethers.Contract(
   ${_name}Data.address,
   ${_name}Data.abi,
   provider
 );`
+    );
 
-    )
+    // -- 5b) create a ts contract
+    fs.writeFileSync(
+      `${OUTDIR}/${_name}.sol/${_name}Contract.ts`,
+      `import { ethers } from "ethers";
+import { ${_name}Data } from "./${_name}Data";
+import { ${_name} } from "./${_name}";
+
+export const get${_name}Contract = (provider: ethers.providers.JsonRpcProvider | any) => new ethers.Contract(
+  ${_name}Data.address,
+  ${_name}Data.abi,
+  provider
+) as ${_name};`
+    );
 
     // -- 6 create an index.ts file that exports everything
     fs.writeFileSync(
       `${OUTDIR}/${_name}.sol/index.ts`,
-      `export * from "./${_name}.data";
+      `export * from "./${_name}Data";
 export * from "./${_name}Contract";
 export * from "./${_name}";`
     );
-      
+
     // -- 6b create an index.js file that exports everything
     fs.writeFileSync(
       `${OUTDIR}/${_name}.sol/index.js`,
-      `export * from "./${_name}.data";
-export * from "./${_name}Contract";`
+      `export * from "./${_name}Data.js";
+export * from "./${_name}Contract.js";`
     );
   }
 }
