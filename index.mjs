@@ -171,6 +171,20 @@ for (const contract of data) {
       outDir: `${OUTDIR}/${_name}.sol`,
       target: "ethers-v5",
     });
+
+    // -- 5) create a contract
+    fs.writeFileSync(
+      `${OUTDIR}/${_name}.sol/${_name}Contract.js`,
+      `import { ethers } from "ethers";
+import { ${_name}Data } from "./${_name}.data";
+
+export const ${_name}Contract = (provider) => new ethers.Contract(
+  ${_name}Data.address,
+  ${_name}Data.abi,
+  provider
+);`
+
+    )
   }
 }
 
