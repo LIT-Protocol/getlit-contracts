@@ -191,11 +191,13 @@ export const get${_name}Contract = (provider) => new ethers.Contract(
 import { ${_name}Data } from "./${_name}Data";
 import { ${_name} } from "./${_name}";
 
-export const get${_name}Contract = (provider: ethers.providers.JsonRpcProvider | any) => new ethers.Contract(
-  ${_name}Data.address,
-  ${_name}Data.abi,
-  provider
-) as ${_name};`
+export const get${_name}Contract = (provider: any) => {
+  return new ethers.Contract(
+    ${_name}Data.address,
+    ${_name}Data.abi,
+    provider
+  ) as unknown as ${_name};
+}`
     );
 
     // -- 6 create an index.ts file that exports everything
