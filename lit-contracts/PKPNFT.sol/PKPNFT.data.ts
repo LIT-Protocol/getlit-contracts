@@ -1,6 +1,6 @@
-export const data_PKPNFT = {
-  "date": "2023-09-06T01:15:16.190021Z",
-  "address": "0xdD708D4E0c4f787FcD6271D583a860082b48f721",
+export const PKPNFTData = {
+  "date": "2023-09-11T06:33:32.865544Z",
+  "address": "0x4Dbd00AdC928C079e4219e0f575C420F8BE94785",
   "contractName": "PKPNFT",
   "abi": [
     {

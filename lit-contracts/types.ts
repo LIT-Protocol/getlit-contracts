@@ -1,3 +1,4 @@
+export * from "./Programmable Keypair.sol/Programmable Keypair.ts";
 export * from "./AccessControlConditions.sol/AccessControlConditions.ts";
 export * from "./Allowlist.sol/Allowlist.ts";
 export * from "./Multisender.sol/Multisender.ts";
@@ -7,4 +8,5 @@ export * from "./PKPNFTMetadata.sol/PKPNFTMetadata.ts";
 export * from "./PKPPermissions.sol/PKPPermissions.ts";
 export * from "./PubkeyRouter.sol/PubkeyRouter.ts";
 export * from "./RateLimitNFT.sol/RateLimitNFT.ts";
+export * from "./Staking.sol/Staking.ts";
 export * from "./StakingBalances.sol/StakingBalances.ts";

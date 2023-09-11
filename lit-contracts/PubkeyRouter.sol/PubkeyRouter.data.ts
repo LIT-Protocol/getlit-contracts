@@ -1,6 +1,6 @@
-export const data_PubkeyRouter = {
-  "date": "2023-09-06T01:15:16.208415Z",
-  "address": "0x0e4fA5C73F9B75AC0ab4beD9837fb9629E9C8Be6",
+export const PubkeyRouterData = {
+  "date": "2023-09-11T06:33:36.585638Z",
+  "address": "0x32C6667E6C74053F249bf218b83A105C47247125",
   "contractName": "PubkeyRouter",
   "abi": [
     {

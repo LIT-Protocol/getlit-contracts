@@ -47,19 +47,19 @@ async function getContracts({ index }) {
       throw new Error(`❌ Error: Failed to fetch data. Response: ${data}`);
     }
 
-    const contracts = data.data
-      .map((item) => {
-        const contract = item.contracts[index];
+    const contracts = data.data.map((item) => {
+      const contract = item.contracts[index];
 
-        return {
-          date: contract.inserted_at,
-          name: item.name,
-          address: contract.address_hash,
-          type: contract.type,
-          ABIUrl: contract.ABIUrl,
-        };
-      })
-      .filter((item) => item.type === "contract");
+      return {
+        date: contract.inserted_at,
+        name: item.name,
+        symbol: item.symbol,
+        address: contract.address_hash,
+        type: contract.type,
+        ABIUrl: contract.ABIUrl,
+      };
+    });
+    // .filter((item) => item.type === "contract");
 
     contracts.forEach((item) => {
       delete item.type;
@@ -87,13 +87,18 @@ if (!fs.existsSync(OUTDIR)) {
 const data = await getContracts({ index: _index });
 
 const maxNameLength = data.reduce((maxLength, contract) => {
-  return Math.max(maxLength, contract.name.length);
+
+  const contractName = contract.name.replace(" ", "");
+
+  return Math.max(maxLength, contractName.length);
 }, 0);
 
 for (const contract of data) {
   const { name, ABI, date } = contract;
 
-  const contractFilePath = `${OUTDIR}/${name}.sol/${name}.json`;
+  const _name = name.replace(" ", "");
+
+  const contractFilePath = `${OUTDIR}/${_name}.sol/${_name}.json`;
 
   if (fs.existsSync(contractFilePath)) {
     const existingContract = JSON.parse(
@@ -104,11 +109,11 @@ for (const contract of data) {
       if (!shouldUpdate) {
         console.log(
           "\x1b[33m%s\x1b[0m",
-          `❓ There's a newer version of the contract ${name}. To update, run the script with --update flag.`
+          `❓ There's a newer version of the contract "${name}". To update, run the script with --update flag.`
         );
         continue; // Skip the rest of the loop for this contract
       } else {
-        // console.log(`...updating contract ${name}...`);
+        // console.log(`...updating contract "${name}"...`);
       }
     } else {
       console.log(
@@ -124,46 +129,46 @@ for (const contract of data) {
     shouldUpdate = true;
   }
 
-  if (!fs.existsSync(`${OUTDIR}/${name}.sol`)) {
-    fs.mkdirSync(`${OUTDIR}/${name}.sol`);
+  if (!fs.existsSync(`${OUTDIR}/${_name}.sol`)) {
+    fs.mkdirSync(`${OUTDIR}/${_name}.sol`);
   }
 
   const contractInfo = JSON.stringify(
     {
       date: contract.date,
       address: contract.address,
-      contractName: name,
+      contractName: _name,
       abi: ABI,
     },
     null,
     2
   );
 
-  console.log("...generating contract & type for", name);
+  console.log(`...generating contract & type for "${name}"`);
 
   // ===== Exports =====
   if (shouldUpdate) {
     // -- 1) export as a json file
-    fs.writeFileSync(`${OUTDIR}/${name}.sol/${name}.json`, contractInfo);
+    fs.writeFileSync(`${OUTDIR}/${_name}.sol/${_name}.json`, contractInfo);
 
     // -- 2) export as a js file
     fs.writeFileSync(
-      `${OUTDIR}/${name}.sol/${name}.data.js`,
-      `export const data_${name} = ${contractInfo}`
+      `${OUTDIR}/${_name}.sol/${_name}.data.js`,
+      `export const ${_name}Data = ${contractInfo}`
     );
 
     // -- 3) export as a ts file
     fs.writeFileSync(
-      `${OUTDIR}/${name}.sol/${name}.data.ts`,
-      `export const data_${name} = ${contractInfo}`
+      `${OUTDIR}/${_name}.sol/${_name}.data.ts`,
+      `export const ${_name}Data = ${contractInfo}`
     );
 
     // -- 4) Generate typechain types
     await runTypeChain({
       cwd: process.cwd(),
-      filesToProcess: [`${OUTDIR}/${name}.sol/${name}.json`],
-      allFiles: [`${OUTDIR}/${name}.sol/${name}.json`],
-      outDir: `${OUTDIR}/${name}.sol`,
+      filesToProcess: [`${OUTDIR}/${_name}.sol/${_name}.json`],
+      allFiles: [`${OUTDIR}/${_name}.sol/${_name}.json`],
+      outDir: `${OUTDIR}/${_name}.sol`,
       target: "ethers-v5",
     });
   }
