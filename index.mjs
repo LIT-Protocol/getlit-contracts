@@ -1,16 +1,47 @@
 #!/usr/bin/env node
 
+/**
+ * Contract Fetcher and Type Generator Script
+ * 
+ * This script is designed to fetch contract data from predefined APIs and generate the necessary files 
+ * and directories to interface with these contracts. It produces JSON, JS, and TS files for each contract,
+ * and organizes them into structured directories.
+ * 
+ * Usage:
+ *   ./script.js [OPTIONS]
+ * 
+ * Options:
+ *   --update    : Flag to indicate if existing contracts should be updated with newer versions.
+ *   --outdir    : Specify the output directory for generated contract files. Default is 'lit-contracts'.
+ *   --network   : Specify the network ('cayenne' or 'serrano') to determine the API endpoint. Default is 'cayenne'.
+ * 
+ * Examples:
+ *   To generate files in a custom directory and update existing contracts:
+ *   ./script.js --update --outdir path/to/your/directory
+ * 
+ *   To fetch the second contract from the serrano network:
+ *   ./script.js --network serrano --index 1
+ * 
+ * @author Anson C
+ */
+
 import fs from "fs";
 import { runTypeChain } from "typechain";
 
-const CAYENNE_API = "https://lit-general-worker.getlit.dev/contract-addresses";
-const SERRANO_API =
-  "https://lit-general-worker.getlit.dev/serrano-contract-addresses";
+const API = `https://lit-general-worker.getlit.dev`;
+const CAYENNE_API = `${API}/contract-addresses`;
+const SERRANO_API = `${API}/serrano-contract-addresses`;
 
-const OUTDIR = "lit-contracts";
+let OUTDIR = "lit-contracts"; // Default value
 
 // Check for --update flag
 let shouldUpdate = process.argv.includes("--update");
+
+// Capture the --outdir argument
+const outdirArgIndex = process.argv.indexOf("--outdir");
+if (outdirArgIndex !== -1 && process.argv[outdirArgIndex + 1]) {
+  OUTDIR = process.argv[outdirArgIndex + 1];
+}
 
 // Capture the index argument
 let _index = 0; // default value

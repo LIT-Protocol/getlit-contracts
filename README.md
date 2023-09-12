@@ -20,9 +20,9 @@ npx @getlit/contracts [options]
 
 ## Options
 
-- `--update`: Use this flag to update the contract files if a newer version is available.
-- `--index`: Specify the index number to fetch a particular contract. By default, the index is set to `0`. (only 0, 1) atm.
-- `--network`: "cayenne" or "serrano"
+- `--update`: Flag to indicate if existing contracts should be updated with newer versions.
+- `--outdir`: Specify the output directory for generated contract files. Default is 'lit-contracts'.
+- `--network`: Specify the network ('cayenne' or 'serrano') to determine the API endpoint. Default is 'cayenne'.
 
 # Demo
 
