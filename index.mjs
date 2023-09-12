@@ -187,6 +187,11 @@ for (const contract of data) {
       `export const ${_name}Data = ${contractInfo}`
     );
 
+    fs.writeFileSync(
+      `${OUTDIR}/${_name}.sol/${_name}Data.mjs`,
+      `export const ${_name}Data = ${contractInfo}`
+    );
+
     // -- 3) export as a ts file
     fs.writeFileSync(
       `${OUTDIR}/${_name}.sol/${_name}Data.ts`,
@@ -207,6 +212,18 @@ for (const contract of data) {
       `${OUTDIR}/${_name}.sol/${_name}Contract.js`,
       `import { ethers } from "ethers";
 import { ${_name}Data } from "./${_name}Data.js";
+
+export const get${_name}Contract = (provider) => new ethers.Contract(
+  ${_name}Data.address,
+  ${_name}Data.abi,
+  provider
+);`
+    );
+
+    fs.writeFileSync(
+      `${OUTDIR}/${_name}.sol/${_name}Contract.mjs`,
+      `import { ethers } from "ethers";
+import { ${_name}Data } from "./${_name}Data.mjs";
 
 export const get${_name}Contract = (provider) => new ethers.Contract(
   ${_name}Data.address,
@@ -244,6 +261,13 @@ export * from "./${_name}";`
       `${OUTDIR}/${_name}.sol/index.js`,
       `export * from "./${_name}Data.js";
 export * from "./${_name}Contract.js";`
+    );
+
+    // -- 6b create an index.js file that exports everything
+    fs.writeFileSync(
+      `${OUTDIR}/${_name}.sol/index.mjs`,
+      `export * from "./${_name}Data.mjs";
+export * from "./${_name}Contract.mjs";`
     );
   }
 }
