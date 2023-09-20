@@ -281,7 +281,7 @@ if (shouldUpdate) {
     })
     .join("\n");
 
-  fs.writeFileSync(`${OUTDIR}/types.ts`, typesFile);
+  fs.writeFileSync(`${OUTDIR}/types.d.ts`, typesFile);
   console.log("------------------");
   console.log("✅ Done!");
 }
