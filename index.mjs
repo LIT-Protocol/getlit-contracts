@@ -2,26 +2,26 @@
 
 /**
  * Contract Fetcher and Type Generator Script
- * 
- * This script is designed to fetch contract data from predefined APIs and generate the necessary files 
+ *
+ * This script is designed to fetch contract data from predefined APIs and generate the necessary files
  * and directories to interface with these contracts. It produces JSON, JS, and TS files for each contract,
  * and organizes them into structured directories.
- * 
+ *
  * Usage:
  *   ./script.js [OPTIONS]
- * 
+ *
  * Options:
  *   --update    : Flag to indicate if existing contracts should be updated with newer versions.
  *   --outdir    : Specify the output directory for generated contract files. Default is 'lit-contracts'.
  *   --network   : Specify the network ('cayenne' or 'serrano') to determine the API endpoint. Default is 'cayenne'.
- * 
+ *
  * Examples:
  *   To generate files in a custom directory and update existing contracts:
  *   ./script.js --update --outdir path/to/your/directory
- * 
+ *
  *   To fetch the second contract from the serrano network:
  *   ./script.js --network serrano --index 1
- * 
+ *
  * @author Anson C
  */
 
@@ -135,7 +135,7 @@ for (const contract of data) {
       fs.readFileSync(contractFilePath, "utf8")
     );
 
-    if (new Date(date) > new Date(existingContract.date)) {
+    if (contract.address !== existingContract.address) {
       if (!shouldUpdate) {
         console.log(
           "\x1b[33m%s\x1b[0m",

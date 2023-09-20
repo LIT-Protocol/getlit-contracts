@@ -1,6 +1,6 @@
 {
   "name": "@getlit/contracts",
-  "version": "0.1.14",
+  "version": "0.1.16",
   "description": "A script to get the latest Lit contract addresses & ABI, with types 😉",
   "main": "index.mjs",
   "scripts": {
