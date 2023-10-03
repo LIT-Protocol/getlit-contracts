@@ -87,7 +87,7 @@ async function getContracts({ index }) {
         symbol: item.symbol,
         address: contract.address_hash,
         type: contract.type,
-        ABIUrl: contract.ABIUrl,
+        ABI: contract.ABI,
       };
     });
     // .filter((item) => item.type === "contract");
@@ -95,14 +95,6 @@ async function getContracts({ index }) {
     contracts.forEach((item) => {
       delete item.type;
     });
-
-    for (const contract of contracts) {
-      const res = await fetch(contract.ABIUrl);
-      const data = await res.json();
-
-      contract.ABI = JSON.parse(data.result);
-      delete contract.ABIUrl;
-    }
 
     return contracts;
   } catch (e) {
